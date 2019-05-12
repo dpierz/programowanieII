@@ -1,79 +1,58 @@
 package Task2;
 
-//1Tworzymy projekt Mavenowy, kod umieszczamy na dowolnym repozytorium git (github, gitlab, bitbucket).
-//2Wykonujemy pierwszy commit w celu sprawdzenia repozytorium
-//3Pierwszym krokiem jest stworzenie konsolowego menu aplikacji.
-// Na początek menu powinno zawierać opcje wyświetlenia listy książek, która póki co będzie pusta oraz wyjścia z programu.
-
-
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Bookstore {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
-        plikMenu();
-
-        int userChoice = Integer.parseInt(scanner.nextLine());
-
-        while (userChoice < 0 && userChoice > 6) {
-            userChoice = Integer.parseInt(scanner.nextLine());
-        }
-
-//        while (userChoice != 2) {
-//            switch (userChoice) {
-//                case 1:
-//                    System.out.println("Wybrałeś: Wyświetlenie listy książek");
-//                    break;
-//                case 2:
-//                    break;
-//                case 3:
-//                    System.out.println("Wybrałeś: Dodanie nowej książki");
-//                    break;
-//                case 4:
-//                    System.out.println("Wybrałeś: Usunięcie książki po nazwie");
-//                    break;
-//                case 5:
-//                    System.out.println("Wybrałeś: Edytowanie roku wydania książki");
-//                    break;
-//                case 6:
-//                    System.out.println("Wybrałeś: Zapisanie listy książek do pliku csv");
-//                    break;
-//            }
+    public static void main(String[] args) throws IOException {
 
         boolean a = true;
         while (a) {
+            fileMenu();
+            int userChoice = getUserChoice();
+            while (userChoice < 0 || userChoice > 6) {
+                infoError();
+                fileMenu();
+                userChoice = getUserChoice();
+            }
+
             switch (userChoice) {
                 case 1:
-                    System.out.println("Wybrałeś: Wyświetlenie listy książek");
+                    System.out.println("Wybrałeś: Wyświetlenie listy książek.");
+                    FileLoader loader = new FileLoader();
+                    loader.readBooksFile();
+                    loader.readAuthorsFile();
+                    loader.readCategoriesFile();
                     break;
                 case 2:
                     a = false;
-                    System.out.println("Wybrałeś: Koniec działania aplikacji");
+                    System.out.println("Wybrałeś: Koniec działania aplikacji.");
                     break;
                 case 3:
-                    System.out.println("Wybrałeś: Dodanie nowej książki");
+                    System.out.println("Wybrałeś: Dodanie nowej książki.");
                     break;
                 case 4:
-                    System.out.println("Wybrałeś: Usunięcie książki po nazwie");
+                    System.out.println("Wybrałeś: Usunięcie książki po nazwie.");
                     break;
                 case 5:
-                    System.out.println("Wybrałeś: Edytowanie roku wydania książki");
+                    System.out.println("Wybrałeś: Edytowanie roku wydania książki.");
                     break;
                 case 6:
-                    System.out.println("Wybrałeś: Zapisanie listy książek do pliku csv");
+                    System.out.println("Wybrałeś: Zapisanie listy książek do pliku csv.");
                     break;
             }
-            if (a) {
-                plikMenu();
-                userChoice = Integer.parseInt(scanner.nextLine());
-            }
-
+            System.out.println();
+            infoAnotherChoiceMenu();// TODO: 12.05.2019
         }
     }
 
+    private static int getUserChoice() {
+        return Integer.parseInt(scanner.nextLine());
+    }
 
-    private static void plikMenu() {
+    private static void fileMenu() {
         System.out.println("Wpisz:\n " +
                 "1 - aby wyświetlić listę książek\n " +
                 "2 - aby wyjść z aplikacji \n " +
@@ -82,5 +61,13 @@ public class Bookstore {
                 "5 - aby edytować roku wydania książki \n " +
                 "6 - aby zapisać listę książek do pliku csv \n "
         );
+    }
+
+    private static void infoError() {
+        System.out.println("Wybrałeś/aś nieprawidłową wartość.");
+    }
+
+    private static void infoAnotherChoiceMenu() {
+        System.out.println("Jeżeli chcesz zmienić wybór skorzystaj z poniższego menu.");
     }
 }
