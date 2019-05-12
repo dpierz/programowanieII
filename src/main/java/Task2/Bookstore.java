@@ -11,23 +11,33 @@ import java.util.Scanner;
 public class Bookstore {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wpisz:\n " +
-                "1 - aby wyświtlić listę książek\n " +
-                "2 - aby wyjść z aplikacji");
-        int userChoice= Integer.parseInt(scanner.nextLine());
 
-        int i=0;
-        while (userChoice!=1  && userChoice!=2 ) {
-                userChoice = Integer.parseInt(scanner.nextLine());
+        plikMenu();
+
+        int userChoice = Integer.parseInt(scanner.nextLine());
+
+        while (userChoice != 1 && userChoice != 2) {
+            userChoice = Integer.parseInt(scanner.nextLine());
         }
-            int menu = 1;
-            switch (menu) {
+
+        while (userChoice != 2) {
+            switch (userChoice) {
                 case 1:
-                    System.out.println("Wyświetl listę książek");
+                    System.out.println("Wyświetlenie listy książek");
                     break;
                 case 2:
-                    System.out.println("Wyjdź");
                     break;
             }
+            plikMenu();
+            userChoice = Integer.parseInt(scanner.nextLine());
         }
+        System.out.println("Koniec działania aplikacji");
+
     }
+
+    private static void plikMenu() {
+        System.out.println("Wpisz:\n " +
+                "1 - aby wyświetlić listę książek\n " +
+                "2 - aby wyjść z aplikacji");
+    }
+}
