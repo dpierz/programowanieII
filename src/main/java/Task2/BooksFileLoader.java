@@ -4,11 +4,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileLoader {
+public class BooksFileLoader {
 
     public List<Book> readBooksFile() throws IOException {
-        List<Book> bookList = new ArrayList<>();
-        FileReader fileReader = new FileReader("D:\\Dokumenty_daria\\SDA_kurs\\programowanieII\\src\\main\\resources\\books.csv");
+        List<Book> listOfBooks = new ArrayList<>();
+        FileReader fileReader = new FileReader("D:\\Dokumenty_daria\\SDA_kurs\\programowanieII\\src\\main\\resources\\booksStart.csv");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         try {
@@ -24,14 +24,14 @@ public class FileLoader {
                 //list autorow -> 3,4 --- > 2 autorow
 
                 Book book = new Book(title, numberIsbn, yearOfPublished);
-                bookList.add(book);
+                listOfBooks.add(book);
                 textLine = bufferedReader.readLine();
             } while (textLine != null);
         } finally {
             bufferedReader.close();
         }
 
-        return bookList;
+        return listOfBooks;
     }
 
     public void readAuthorsFile() throws IOException {
@@ -52,7 +52,6 @@ public class FileLoader {
     public void readCategoriesFile() throws IOException {
         FileReader fileReader = new FileReader("D:\\Dokumenty_daria\\SDA_kurs\\programowanieII\\src\\main\\resources\\categories.csv");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-
         try {
             String textLine = bufferedReader.readLine();
             do {

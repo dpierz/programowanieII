@@ -15,23 +15,9 @@ public class Category {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getDisplayPriority() {
-        return displayPriority;
-    }
-
-    public void setDisplayPriority(int displayPriority) {
-        this.displayPriority = displayPriority;
-    }
-
-    public String getCategoriesName() {
-        return categoriesName;
-    }
-
-    public void setCategoriesName(String categoriesName) {
-        this.categoriesName = categoriesName;
+    @Override
+    public String toString() {
+        return "Id kategorii: "+id;
     }
 }
+
