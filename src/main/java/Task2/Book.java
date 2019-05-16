@@ -1,16 +1,20 @@
 package Task2;
 
+import java.util.List;
+
 public class Book {
     private String title;
     private long numberIsbn;
-    private int yearOfPublished; //todo integer
-//    List<Author>
+    private int yearOfPublication;
+//    private List <Author> authors; //TODO autorzy i kategorie uzupełnić
+//    private Category category;
 
-   public Book(String title, long numberIsbn, int yearOfPublished) {
-
+    public Book(String title, long numberIsbn, int yearOfPublication) { //List<Author> authors, Category category) {
         this.title = title;
         this.numberIsbn = numberIsbn;
-        this.yearOfPublished = yearOfPublished;
+        this.yearOfPublication = yearOfPublication;
+//        this.authors = authors;
+//        this.category = category;
     }
 
     public String getTitle() {
@@ -29,12 +33,27 @@ public class Book {
         this.numberIsbn = numberIsbn;
     }
 
-    public int getYearOfPublished() {
-        return yearOfPublished;
+    public int getYearOfPublication() {
+        return yearOfPublication;
     }
 
-    public void setYearOfPublished(int yearOfPublished) {
-        this.yearOfPublished = yearOfPublished;
+    public void setYearOfPublication(int yearOfPublication) {
+        this.yearOfPublication = yearOfPublication;
     }
 
+//    public List<Author> getAuthors() {
+//        return authors;
+//    }
+//
+//    public void setAuthors(List<Author> authors) {
+//        this.authors = authors;
+//    }
+//
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 }
