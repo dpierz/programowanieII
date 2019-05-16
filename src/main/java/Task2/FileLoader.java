@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FileLoader {
 
-    public void readBooksFile() throws IOException {
+    public List<Book> readBooksFile() throws IOException {
         List<Book> bookList = new ArrayList<>();
         FileReader fileReader = new FileReader("D:\\Dokumenty_daria\\SDA_kurs\\programowanieII\\src\\main\\resources\\books.csv");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -16,17 +16,22 @@ public class FileLoader {
             do {
                 String[] split = textLine.split(";");
                 String title = split[0];
-                String yearOfPublished = split[2]; // TODO: 12.05.2019 powinien być integer
-                String numberIsbn = split[1];
+                int yearOfPublished = Integer.parseInt(split[2]);
+                long numberIsbn = Long.parseLong(split[1]);
 //                System.out.println(textLine);
-                Book book = new Book();
+                //3,4
+                //list autorow
+                //list autorow -> 3,4 --- > 2 autorow
+
+                Book book = new Book(title, numberIsbn, yearOfPublished);
                 bookList.add(book);
                 textLine = bufferedReader.readLine();
             } while (textLine != null);
         } finally {
             bufferedReader.close();
         }
-        System.out.println(bookList);
+
+        return bookList;
     }
 
     public void readAuthorsFile() throws IOException {

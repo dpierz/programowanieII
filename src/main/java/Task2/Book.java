@@ -2,11 +2,12 @@ package Task2;
 
 public class Book {
     private String title;
-    private String numberIsbn;
-    private String yearOfPublished; //todo integer
+    private long numberIsbn;
+    private int yearOfPublished; //todo integer
+//    List<Author>
 
-   // public Book(String title, String numberIsbn, String yearOfPublished) {todo konstruktor bezwarunkowy zrobiłam, a powinen chyba wymuszać żeby ksiażka tak wyglądała, ale nie wiem co wpisać w klasie menu
-    public Book (){
+   public Book(String title, long numberIsbn, int yearOfPublished) {
+
         this.title = title;
         this.numberIsbn = numberIsbn;
         this.yearOfPublished = yearOfPublished;
@@ -20,25 +21,20 @@ public class Book {
         this.title = title;
     }
 
-    public String getNumberIsbn() {
+    public long getNumberIsbn() {
         return numberIsbn;
     }
 
-    public void setNumberIsbn(String numberIsbn) {
+    public void setNumberIsbn(long numberIsbn) {
         this.numberIsbn = numberIsbn;
     }
 
-    public String getYearOfPublished() {
+    public int getYearOfPublished() {
         return yearOfPublished;
     }
 
-    public void setYearOfPublished(String yearOfPublished) {
+    public void setYearOfPublished(int yearOfPublished) {
         this.yearOfPublished = yearOfPublished;
     }
 
-    @Override
-    public String toString() {
-        return
-                title+" "+yearOfPublished+" "+numberIsbn +"\n";//todo dlaczego tak głupio się wyświetla przecinki?
-    }
 }
