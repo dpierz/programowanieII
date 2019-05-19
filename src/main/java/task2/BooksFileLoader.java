@@ -1,4 +1,4 @@
-package Task2;
+package task2;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ public class BooksFileLoader {
         try {
             String textLine = bufferedReader.readLine();
             do {
-                String[] split = textLine.split(";");
-                String title = split[0];
-                int yearOfPublished = Integer.parseInt(split[2]);
-                long numberIsbn = Long.parseLong(split[1]);
+                String[] splittedLineFromBooksFile = textLine.split(";");
+                String title = splittedLineFromBooksFile[0];
+                int yearOfPublished = Integer.parseInt(splittedLineFromBooksFile[2]);
+                long numberIsbn = Long.parseLong(splittedLineFromBooksFile[1]);
 //                System.out.println(textLine);
                 //3,4
                 //list autorow

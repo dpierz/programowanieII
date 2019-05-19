@@ -1,6 +1,6 @@
-package Task2;
+package task2;
 
-import java.util.List;
+import java.util.Objects;
 
 public class Book {
     private String title;
@@ -56,4 +56,14 @@ public class Book {
 //    public void setCategory(Category category) {
 //        this.category = category;
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", numberIsbn=" + numberIsbn +
+                ", yearOfPublication=" + yearOfPublication +
+                '}';
+    }
 }

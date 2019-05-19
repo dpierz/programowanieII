@@ -1,74 +1,24 @@
-package Task2;
+package task2;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class BooksMethods {
     static Scanner scanner = new Scanner(System.in);
     BooksFileLoader loader = new BooksFileLoader();
     List<Book> listOfBooks = new ArrayList<>();//załadowanie pliku
-    String title;
     static BooksFileWriter booksFileWriter = new BooksFileWriter();
 
     {
         try {
             listOfBooks = loader.readBooksFile();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Nie udało się załadować książek z pliku");
+            throw new IllegalStateException(e.getMessage()); //wywalenie programu
         }
-    }
-
-    void menuApp() {
-        printBookstoreMenu();
-        boolean startMenu = true;
-        while (startMenu) {
-            int usersChoice = getUsersChoice();
-            switch (usersChoice) {
-                case 1:
-                    displayListOfBooks();
-                    break;
-                case 2:
-                    addBook();
-                    break;
-                case 3:
-                    removeBookByTitle();
-                    break;
-                case 4:
-                    editYearOfPublication();
-                    break;
-                case 5:
-                    saveToCsv();
-                    break;
-                case 6:
-                    startMenu = false; //todo przez if'a nie kończy działania aplikacji
-                    exitApp();
-                    break;
-                default:
-                    printInfoError();
-            }
-            if(startMenu) { //todo dlaczego while nie działa i dodaje do case 6 kolejny wybór
-                System.out.println();
-                printInfoAnotherChoiceMenu();
-                menuApp();
-            }
-        }
-    }
-
-    void printBookstoreMenu() {
-        System.out.println("Wpisz:\n " +
-                "1 - aby wyświetlić listę książek \n " +
-                "2 - aby dodać nową książkę \n " +
-                "3 - aby usunąć książki po nazwie \n " +
-                "4 - aby edytować rok wydania książki \n " +
-                "5 - aby zapisać listę książek do pliku csv \n " +
-                "6 - aby wyjść z aplikacji \n "
-        );
-    }
-
-    int getUsersChoice() {
-        return Integer.parseInt(scanner.nextLine());
+        System.out.println("Dalsza część programu.");
     }
 
     void displayListOfBooks() {
@@ -80,7 +30,7 @@ public class Menu {
 
     void addBook() {
         System.out.println("Wybrałeś: Dodanie nowej książki. \n" + "Podaj tytuł książki, którą chcesz dodać:");
-        title = scanner.nextLine();
+        String title = scanner.nextLine(); //defi
         System.out.println("Podaj datę wydania");
         int year = Integer.parseInt(scanner.nextLine());
         System.out.println("Podaj numer ISBN");
@@ -91,7 +41,7 @@ public class Menu {
     void removeBookByTitle() {
         System.out.println(
                 "Wybrałeś: Usunięcie książki po nazwie. \n" + "Podaj tytuł książki, którą chcesz usunąć:");
-        title = scanner.nextLine();
+        String title = scanner.nextLine();
         for (Book book : listOfBooks) {
             if(book.getTitle().equals(title)) {
                 listOfBooks.remove(book);
