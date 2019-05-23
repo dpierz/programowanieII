@@ -1,6 +1,7 @@
 //import org.junit.Assert;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.MapAssert;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,63 +26,63 @@ public class Task3BookFunctionsTest {
         books.add(new Book("Clean Architecture", 134494164, 2017));
     }
 
-    @Test //1 test loop
+    @Test //1 Loop
     public void testIsbnFinderLoop() {
         Book book = bookFunctions.isbnFinderLoop(134494164, books);
         Assert.assertEquals("Clean Architecture", book.getTitle());
     }
 
-    @Test //1 test stream
+    @Test //1 Stream
     public void testIsbnFinderStream() {
         Book book = bookFunctions.isbnFinderStream(134494164, books).get();
         Assert.assertEquals("Clean Architecture", book.getTitle());
     }
 
-    @Test //2 test loop
+    @Test //2 Loop
     public void testLastTwoBookFinder() {
         List<Book> books1 = bookFunctions.lastTwoBookFinderLoop(books);
         Assert.assertEquals("Clean Architecture", books1.get(1).getTitle()); //TODO jak bez 0 i 1? assert j biblioteka
         Assert.assertEquals("Head First Design Patterns", books1.get(0).getTitle());
     }
 
-    @Test //2 test stream
+    @Test //2 Stream
     public void testLastTwoBookFinderStream() {
         List<Book> books1 = bookFunctions.lastTwoBookFinderStream(books);
         Assertions.assertThat(books1).containsExactly(books.get(4), books.get(5));
     }
 
-    @Test //3 test loop
+    @Test //3 Loop
     public void testTheOldestBookFinderLoop() {
         Book book = bookFunctions.theOldestBookFinderLoop(books);
         Assert.assertEquals("Test Driven Development: By Example", book.getTitle());
     }
 
-    @Test //3 test stream
+    @Test //3 Stream
     public void testTheOldestBookFinderStream() {
         Optional<Book> optionalBook = bookFunctions.theOldestBookFinderStream(books);
         Book book = optionalBook.get();
         Assert.assertEquals("Test Driven Development: By Example", book.getTitle());
     }
 
-    @Test //3 test stream should not find
+    @Test //3 Stream should not find
     public void testTheOldestBookNotFinderStream() {
         Optional<Book> book = bookFunctions.theOldestBookFinderStream(emptyList);
         Assert.assertFalse(book.isPresent());
     }
 
-    @Test //4 test loop
+    @Test //4 Loop
     public void testTheYoungestBookFinderLoop() {
         Book book = bookFunctions.theYoungestBookFinderLoop(books);
         Assert.assertEquals("Effective Java (3rd Edition)", book.getTitle());
     }
 
-    @Test //4 test stream
+    @Test //4 Stream
     public void testTheYoungestBookFinderStream() {
         Optional<Book> optionalBook = bookFunctions.theYoungestBookFinderStream(books);
         Assert.assertEquals("Effective Java (3rd Edition)", optionalBook.get().getTitle());
     }
 
-    @Test //4 test stream pusta lista
+    @Test //4 Stream empty list
     public void testTheYoungestBookNotFinderStream() {
         Optional<Book> optionalBook = bookFunctions.theYoungestBookFinderStream(emptyList);
         Assert.assertFalse(optionalBook.isPresent());
@@ -99,21 +100,11 @@ public class Task3BookFunctionsTest {
         Assert.assertEquals(12050, sumOfYear);
     }
 
-//    @Test //5 Stream
-//    public void testSumOfYearForAllBooksStream2222() {
-//        int sumOfYear = bookFunctions.sumOfYearForAllBooksStream(new ArrayList<>());
-//        Assert.assertEquals(12050, sumOfYear);
-//    }
-
-//Test stream is empty?
-
-
     @Test //6 Loop
     public void testCountAmountOfBooksAfter2007() {
         int counterOfBooks = bookFunctions.countAmountOfBooksAfter2007Loop(books);
         Assert.assertEquals(3, counterOfBooks);
     }
-
 
     @Test //6 Stream
     public void testCountAmountOfBooksAfter2007Stream() {
@@ -133,8 +124,6 @@ public class Task3BookFunctionsTest {
         Assert.assertEquals(true, isTrue);
     }
 
-    // Test //7 stream isEmpty
-
     @Test //8 Loop
     public void testavarageOfBooksYearsLoop() {
         double average = bookFunctions.avarageOfBooksYears(books);
@@ -145,10 +134,6 @@ public class Task3BookFunctionsTest {
     public void testAvarageOfBooksYearsStream() {
         double average = bookFunctions.avarageOfBooksYearsStream(books).getAsDouble();
         Assert.assertEquals(2008.33, average, 0.1); // 0.1 trzeci parametr, pokazuje możliwy błąd
-
-
-        // Double average = bookFunctions.avarageOfBooksYearsStream(new ArrayList<>());
-//        Assert.assertEquals(2008.33, average, 0.1);//todo jak wyzej
     }
 
     @Test //9 Loop
@@ -162,8 +147,6 @@ public class Task3BookFunctionsTest {
         boolean isAny = bookFunctions.isAnyBookPublishedBefore2003Stream(books);
         Assert.assertEquals(true, isAny);
     }
-
-    // Test //9 stream isEmpty
 
     @Test //10 Loop
     public void testReturnAllBooksOnCLetterAndPublishedAfter2000Loop() {
@@ -231,10 +214,18 @@ public class Task3BookFunctionsTest {
         Assertions.assertThat(book).containsExactly(books.get(2), books.get(3), books.get(4), books.get(0), books.get(5), books.get(1));
     }
 
-    @Test //13 Stream
+    @Test //14 Stream
     public void testSortBooksFromTheOldestStream() {
         List<Book> book = bookFunctions.sortBooksFromTheOldestStream(books);
         Assertions.assertThat(book).containsExactly(books.get(2), books.get(3), books.get(4), books.get(0), books.get(5), books.get(1));
+    }
+
+    @Test //15 Loop
+    public void testDivideList(){
+        Map<String, List<Book>> map = bookFunctions.splitList(books);//todo nie potrafię przetestować tego rozwiązania
+//        Assertions.assertThat(map).containsExactly("list1", books.get(0), books.get(1));
+//        Assertions.assertThat(map).containsExactly("list2", books.get(2), books.get(3));
+//        Assertions.assertThat(map).containsExactly("list3", books.get(4), books.get(5));
     }
 }
 

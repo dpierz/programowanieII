@@ -1,14 +1,4 @@
 package task2;
-//1Znajdź książkę o podanym ISBN. Metoda przyjmuje 2 parametry (isbn, lista wszystkich książek) i zwraca podaną książkę.
-//2Zwróć dwie ostatnie książki.
-//3Zwróć najwcześniej wydana książkę.
-//4Zwróć najpóźniej wydana książkę.
-//5Zwróć sumę lat wydania wszystkich książek.
-//6Zwróć liczbę książek wydanych po 2007 roku.
-//7Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku.
-//8Zwróć średni rok wydania książki w naszym katalogu.
-//9Zwróć informacje o tym czy jakakolwiek książka w naszym katalogu jest wydana przed  2003 rokiem.
-
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,7 +6,8 @@ import java.util.stream.Collectors;
 public class Task3BookFunctions {
     BookComparator bookComparator = new BookComparator();
 
-    //1 loop
+    //1 Znajdź książkę o podanym ISBN. Metoda przyjmuje 2 parametry (isbn, lista wszystkich książek) i zwraca podaną książkę.
+    //1 Loop
     public Book isbnFinderLoop(long numberIsbn, List<Book> listOfBooks) {
         for (Book book : listOfBooks) {
             if(book.getNumberIsbn() == numberIsbn) {
@@ -26,37 +17,24 @@ public class Task3BookFunctions {
         return null;
     }
 
-    //1 stream
+    //1 Stream
     public Optional<Book> isbnFinderStream(long numberIsbn, List<Book> listOfBooks) {
         return listOfBooks.stream().filter(book -> book.getNumberIsbn() == numberIsbn).findFirst(); //porównuje cos z czymś i zwraca booleana
-//        if (first.isPresent()) {
-//            return first.get();
-//        } else {
-//            return null;
-//        }
     }
 
+    //2 Zwróć dwie ostatnie książki.
     //2 Loop
     public List<Book> lastTwoBookFinderLoop(List<Book> listOfBooks) {
         return listOfBooks.subList(listOfBooks.size() - 2, listOfBooks.size());
     }
-
-    //2 to samo w pętli
-    //   public List<Book> lastTwoBookFinder(List<Book> listOfBooks) {
-    //       List<Book> list = new ArrayList<>();
-    //        for (int i = listOfBooks.size() - 2; i < listOfBooks.size(); i++) {
-    //            Book book = listOfBooks.get(i);
-    //            list.add(book);
-    //        }
-    //        return list;
-    //    }
 
     //2 Stream
     public List<Book> lastTwoBookFinderStream(List<Book> listOfBooks) {
         return listOfBooks.stream().skip(listOfBooks.size() - 2).collect(Collectors.toList());
     }
 
-    //3 loop
+    //3 Zwróć najwcześniej wydana książkę.
+    //3 Loop
     public Book theOldestBookFinderLoop(List<Book> listOfBooks) {
         Book min = listOfBooks.get(0);
         for (int i = 0; i < listOfBooks.size(); i++) {
@@ -67,7 +45,7 @@ public class Task3BookFunctions {
         return min;
     }
 
-    //3 stream
+    //3 Stream
     public Optional<Book> theOldestBookFinderStream(List<Book> listOfBooks) {
         //return listOfBooks.stream()
         //        .min(Comparator.comparingInt(Book::getYearOfPublication));
@@ -75,7 +53,8 @@ public class Task3BookFunctions {
                 .min(bookComparator);
     }
 
-    //4 loop
+    //4 Zwróć najpóźniej wydana książkę.
+    //4 Loop
     public Book theYoungestBookFinderLoop(List<Book> listOfBooks) {
         Book max = listOfBooks.get(0);
         for (int i = 0; i < listOfBooks.size(); i++) {
@@ -86,13 +65,14 @@ public class Task3BookFunctions {
         return max;
     }
 
-    //4 stream
+    //4 Stream
     public Optional<Book> theYoungestBookFinderStream(List<Book> listOfBooks) {
         return listOfBooks.stream()
                 .max(bookComparator);
     }
 
-    // 5 loop
+    //5 Zwróć sumę lat wydania wszystkich książek.
+    //5 Loop
     public int sumOfYearForAllBooksLoop(List<Book> listOfBooks) {
         int sum = 0;
         for (Book book : listOfBooks) {
@@ -101,7 +81,7 @@ public class Task3BookFunctions {
         return sum;
     }
 
-    //5 stream
+    //5 Stream
     public int sumOfYearForAllBooksStream(List<Book> listOfBooks) {
         int sum = listOfBooks.stream().mapToInt(book -> book.getYearOfPublication()).sum(); //mapa która zmapuje coś na coś
         return sum;
@@ -113,9 +93,10 @@ public class Task3BookFunctions {
     //        }
     //        int sum = listOfBooks.stream().mapToInt(book -> book.getYearOfPublication()).sum(); //mapa która zmapuje coś na coś
     //        return sum;
-    //    }//todo putsa z wyjątkiem, albo zwracając zero
+    //    }//todo pusta z wyjątkiem, albo zwracając zero
 
-    //6 loop
+    //6 Zwróć liczbę książek wydanych po 2007 roku.
+    //6 Loop
     public int countAmountOfBooksAfter2007Loop(List<Book> listOfBooks) {
         int counter = 0;
         for (Book book : listOfBooks) {
@@ -126,13 +107,13 @@ public class Task3BookFunctions {
         return counter;
     }
 
-    //6 stream
+    //6 Stream
     public int countAmountOfBooksAfter2007Stream(List<Book> listOfBooks) {
         return (int) listOfBooks.stream().filter(book -> book.getYearOfPublication() > 2007).count();
     }
 
-    //7 Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku.
-    // 7 loop
+    // 7 Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku.
+    // 7 Loop
     public boolean isEveryBookPublishedAfter2000Loop(List<Book> listOfBooks) {
         boolean isAllAfter2000 = true;
         ArrayList<Book> list = new ArrayList<>();
@@ -144,7 +125,7 @@ public class Task3BookFunctions {
         return isAllAfter2000;
     }
 
-    //7 stream
+    //7 Stream
     public boolean isEveryBookPublishedAfter2000Stream(List<Book> listOfBooks) {
         return listOfBooks.stream().allMatch(book -> book.getYearOfPublication() > 2000);
     }
@@ -178,7 +159,7 @@ public class Task3BookFunctions {
         return isAnyBefore2003;
     }
 
-    //9 stream
+    //9 Stream
     public boolean isAnyBookPublishedBefore2003Stream(List<Book> listOfBooks) {
         return listOfBooks.stream().anyMatch(book -> book.getYearOfPublication() < 2003);
     }
@@ -201,7 +182,6 @@ public class Task3BookFunctions {
                 .collect(Collectors.toList());
     }
 
-
     //11 Zwróć tytuły wszystkich książek, których rok jest podzielny przez 2.
     //11 Loop
     public List<Book> isDivisibleBy2Loop(List<Book> listOfBooks) {
@@ -220,7 +200,7 @@ public class Task3BookFunctions {
     }
 
     //12 Zwróć mapę, która będzie miała klucz isbn i wartość obiekt Book (Map<String, Book>).
-    // 12 Loop
+    //12 Loop
     public Map<String, Book> mapOfIsbnAndBookLoop(List<Book> listOfBooks) {
         Map<String, Book> map = new HashMap<>();
         for (Book book : listOfBooks) {
@@ -235,52 +215,42 @@ public class Task3BookFunctions {
     }
 
     //13 Posortuj książki po roku wydania zaczynając od wydanej najpóźniej.
-    // 13 Loop
+    //13 Loop
     public List<Book> sortBooksFromTheYoungestLoop(List<Book> listOfBooks) {
         ArrayList<Book> books = new ArrayList<>(listOfBooks);
         Collections.sort(books, new BookComparator().reversed());
         return books;
     }
-
-    public List<Book> sortBooksFromTheYoungestStream(List<Book>listOfBooks) {
+//13 Stream
+    public List<Book> sortBooksFromTheYoungestStream(List<Book> listOfBooks) {
         return listOfBooks.stream().sorted(bookComparator.reversed()).collect(Collectors.toList());
     }
 
-
     //14 Posortuj książki po roku wydania zaczynając od wydanej najwcześniej.
-    // 14 Loop
+    //14 Loop
     public List<Book> sortBooksFromTheOldestLoop(List<Book> listOfBooks) {
         ArrayList<Book> books = new ArrayList<>(listOfBooks);
         Collections.sort(books, new BookComparator());
         return books;
     }
 
-    public List<Book> sortBooksFromTheOldestStream(List<Book>listOfBooks) {
+    //14 Stream
+    public List<Book> sortBooksFromTheOldestStream(List<Book> listOfBooks) {
         return listOfBooks.stream().sorted(bookComparator).collect(Collectors.toList());
     }
 
-    //15 
+    //15 Podziel listę książek na 3 listy po 2 książki i zwróć z metody. (*) (bez streama)
+    public Map<String, List<Book>> splitList(List<Book> listsOfBooks) {
 
-//        List<Book> list = new ArrayList<>();
-//        int max = 0;
-//        int temp = 0;
-//        for (Book book : listOfBooks) {
-//            if(max == Integer.max(book.getYearOfPublication(), temp)){
-//                temp=book.getYearOfPublication();
-//            }
-//            list.add(book);
-//        }
-//        return list;
+        int sizeList = listsOfBooks.size();
+        List<Book> list1 = new ArrayList<>(listsOfBooks.subList(0,(sizeList/3)));
+        List<Book> list2 = new ArrayList<>(listsOfBooks.subList((sizeList/3),((sizeList/3)+2)));
+        List<Book> list3 = new ArrayList<>(listsOfBooks.subList(((sizeList/3)+2), sizeList));
+
+        Map<String, List<Book>> mapOfLists= new HashMap<>();
+        mapOfLists.put("list1", list1);
+        mapOfLists.put("list2", list2);
+        mapOfLists.put("list3", list3);
+        return mapOfLists;
     }
-
-
-
-//3
-//    public Book theOldestBookFinder(int year, List<Book> listOfBooks) {
-//        Collections.sort(listOfBooks, (o1, o2) -> Integer.compare(o1.getYearOfPublication(), o2.getYearOfPublication()));
-//        listOfBooks.get(0)
-//lambdy
-//komparator
-
-
-//}
+}
