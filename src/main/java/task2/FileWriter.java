@@ -3,9 +3,9 @@ package task2;
 import java.io.*;
 import java.util.List;
 
-public class BooksFileWriter {
+public class FileWriter {
     void saveData(List<Book> listOfBooks) {
-        try (FileWriter fileWriter = new FileWriter("D:\\Dokumenty_daria\\SDA_kurs\\programowanieII\\src\\main\\resources\\books.csv")) {
+        try (java.io.FileWriter fileWriter = new java.io.FileWriter("D:\\Dokumenty_daria\\SDA_kurs\\programowanieII\\src\\main\\resources\\books123.csv")) {
             try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
                 for (Book book : listOfBooks) {
                     bufferedWriter.write(book.getTitle() + ";" + book.getNumberIsbn() + ";" + book.getYearOfPublication() + " \n");

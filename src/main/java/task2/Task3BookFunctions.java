@@ -37,9 +37,9 @@ public class Task3BookFunctions {
     //3 Loop
     public Book theOldestBookFinderLoop(List<Book> listOfBooks) {
         Book min = listOfBooks.get(0);
-        for (int i = 0; i < listOfBooks.size(); i++) {
-            if(listOfBooks.get(i).getYearOfPublication() < min.getYearOfPublication()) {
-                min = listOfBooks.get(i);
+        for (Book listOfBook : listOfBooks) {
+            if(listOfBook.getYearOfPublication() < min.getYearOfPublication()) {
+                min = listOfBook;
             }
         }
         return min;
@@ -56,13 +56,13 @@ public class Task3BookFunctions {
     //4 Zwróć najpóźniej wydana książkę.
     //4 Loop
     public Book theYoungestBookFinderLoop(List<Book> listOfBooks) {
-        Book max = listOfBooks.get(0);
-        for (int i = 0; i < listOfBooks.size(); i++) {
-            if(listOfBooks.get(i).getYearOfPublication() > max.getYearOfPublication()) {
-                max = listOfBooks.get(i);
+        Book youngestBook = listOfBooks.get(0);
+        for (Book listOfBook : listOfBooks) {
+            if(listOfBook.getYearOfPublication() > youngestBook.getYearOfPublication()) {
+                youngestBook = listOfBook;
             }
         }
-        return max;
+        return youngestBook;
     }
 
     //4 Stream
@@ -83,7 +83,7 @@ public class Task3BookFunctions {
 
     //5 Stream
     public int sumOfYearForAllBooksStream(List<Book> listOfBooks) {
-        int sum = listOfBooks.stream().mapToInt(book -> book.getYearOfPublication()).sum(); //mapa która zmapuje coś na coś
+        int sum = listOfBooks.stream().mapToInt(book -> book.getYearOfPublication()).sum(); //W komentarzu masz "mapa która zmapuje coś na coś" To nie jest mapa, piszę to tylko po to, żebyś dokładnie widziała różnicę między Mapą w javie (klucz, wartość) a metodą map na streamie. Map to po prostu funkcja, która zamienia jedno na drugie.
         return sum;
     }
 
@@ -115,14 +115,13 @@ public class Task3BookFunctions {
     // 7 Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku.
     // 7 Loop
     public boolean isEveryBookPublishedAfter2000Loop(List<Book> listOfBooks) {
-        boolean isAllAfter2000 = true;
         ArrayList<Book> list = new ArrayList<>();
         for (Book book : listOfBooks) {
             if(book.getYearOfPublication() < 2000) {
-                isAllAfter2000 = false;
+                return false;
             }
         }
-        return isAllAfter2000;
+        return true;
     }
 
     //7 Stream
@@ -153,10 +152,10 @@ public class Task3BookFunctions {
         boolean isAnyBefore2003 = false;
         for (Book book : listOfBooks) {
             if(book.getYearOfPublication() < 2003) {
-                isAnyBefore2003 = true;
+                return true;
             }
         }
-        return isAnyBefore2003;
+        return false;
     }
 
     //9 Stream
@@ -169,8 +168,9 @@ public class Task3BookFunctions {
     public List<Book> returnAllBooksOnCLetterAndPublishedAfter2007Loop(List<Book> listOfBooks) {
         ArrayList<Book> list = new ArrayList<>();
         for (Book book : listOfBooks) {
-            if(book.getTitle().startsWith("C") && book.getYearOfPublication() > 2007)
+            if(book.getTitle().startsWith("C") && book.getYearOfPublication() > 2007) {
                 list.add(book);
+            }
         }
         return list;
     }
@@ -217,8 +217,8 @@ public class Task3BookFunctions {
     //13 Posortuj książki po roku wydania zaczynając od wydanej najpóźniej.
     //13 Loop
     public List<Book> sortBooksFromTheYoungestLoop(List<Book> listOfBooks) {
-        ArrayList<Book> books = new ArrayList<>(listOfBooks);
-        Collections.sort(books, new BookComparator().reversed());
+        List<Book> books = new ArrayList<>(listOfBooks);
+        books.sort(new BookComparator().reversed()); //powinno byc tak jak teraz, bo List.sort nie działa
         return books;
     }
 //13 Stream

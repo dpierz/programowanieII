@@ -115,19 +115,19 @@ public class Task3BookFunctionsTest {
     @Test //7 Loop
     public void testIsEveryBookPublishedAfter2000Loop() {
         boolean isTrue = bookFunctions.isEveryBookPublishedAfter2000Loop(books);
-        Assert.assertEquals(true, isTrue);
+        Assert.assertTrue(isTrue);
     }
 
     @Test //7 Stream
     public void testIsEveryBookPublishedAfter2000Stream() {
         boolean isTrue = bookFunctions.isEveryBookPublishedAfter2000Stream(books);
-        Assert.assertEquals(true, isTrue);
+        Assert.assertTrue(isTrue);
     }
 
     @Test //8 Loop
     public void testavarageOfBooksYearsLoop() {
         double average = bookFunctions.avarageOfBooksYears(books);
-        Assert.assertEquals(2008.33, average, 0.1);//todo jak zaokrąglic do dwóch
+        Assert.assertEquals(2008.33, average, 0.1);//Trzeci parametr to po prostu liczba wyrażająca jaki błąd akceptujesz. Jeśli wynik to będzie 10.5, asercja będzie na 10.3 a dasz błąd 0.2 to test przejdize. Jak 0.3 to już nie.trzeci parametr
     }
 
     @Test //8 Stream

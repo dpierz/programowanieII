@@ -2,12 +2,12 @@ package task2;
 
 public class Author {
     private int authorsId;
-    private String authorsName;
+    private String authorsNameAndSurname;
     private int authorsAge;
 
-    public Author(int id, String authorsName, String authorsSurname, int authorsAge) {
+    public Author(int id, String authorsNameAndSurname, int authorsAge) {
         this.authorsId = id;
-        this.authorsName = authorsName;
+        this.authorsNameAndSurname = authorsNameAndSurname;
         this.authorsAge = authorsAge;
     }
 
@@ -15,12 +15,20 @@ public class Author {
         return authorsId;
     }
 
-    public String getAuthorsName() {
-        return authorsName;
+    public String getAuthorsNameAndSurname() {
+        return authorsNameAndSurname;
+    }
+
+    public int getAuthorsAge() {
+        return authorsAge;
+    }
+
+    public void setAuthorsId(int authorsId) {
+        this.authorsId = authorsId;
     }
 
     @Override
     public String toString() {
-        return authorsId + " " + authorsName;
+        return ""+authorsId;
     }
 }

@@ -1,20 +1,27 @@
 package task2;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Book {
     private String title;
     private long numberIsbn;
     private int yearOfPublication;
-//    private List <Author> authors; //TODO autorzy i kategorie uzupełnić
-//    private Category category;
+    private List<Author> authors;
+    private Category category;
 
-    public Book(String title, long numberIsbn, int yearOfPublication) { //List<Author> authors, Category category) {
+    public Book(String title, long numberIsbn, int yearOfPublication) {
         this.title = title;
         this.numberIsbn = numberIsbn;
         this.yearOfPublication = yearOfPublication;
-//        this.authors = authors;
-//        this.category = category;
+    }
+
+    public Book(String title, long numberIsbn, int yearOfPublication, List<Author> authors, Category category) { //List<Author> authors, Category category) {
+        this.title = title;
+        this.numberIsbn = numberIsbn;
+        this.yearOfPublication = yearOfPublication;
+        this.authors = authors;
+        this.category = category;
     }
 
     public String getTitle() {
@@ -41,21 +48,21 @@ public class Book {
         this.yearOfPublication = yearOfPublication;
     }
 
-//    public List<Author> getAuthors() {
-//        return authors;
-//    }
-//
-//    public void setAuthors(List<Author> authors) {
-//        this.authors = authors;
-//    }
-//
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 
     @Override
@@ -64,6 +71,8 @@ public class Book {
                 "title='" + title + '\'' +
                 ", numberIsbn=" + numberIsbn +
                 ", yearOfPublication=" + yearOfPublication +
+                ", authors=" + authors +
+                ", category=" + category +
                 '}';
     }
 }

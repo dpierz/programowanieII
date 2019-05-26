@@ -7,9 +7,10 @@ import java.util.Scanner;
 
 public class BooksMethods {
     static Scanner scanner = new Scanner(System.in);
-    BooksFileLoader loader = new BooksFileLoader();
+    BooksFilesLoader loader = new BooksFilesLoader();
     List<Book> listOfBooks = new ArrayList<>();//załadowanie pliku
-    static BooksFileWriter booksFileWriter = new BooksFileWriter();
+    static FileWriter booksFileWriter = new FileWriter();
+    DisplayFormat displayFormat = new DisplayFormat();
 
     {
         try {
@@ -18,14 +19,11 @@ public class BooksMethods {
             System.out.println("Nie udało się załadować książek z pliku");
             throw new IllegalStateException(e.getMessage()); //wywalenie programu
         }
-        System.out.println("Dalsza część programu.");
     }
 
-    void displayListOfBooks() {
+    void displayListOfBooks(List<Book> listOfBooks) {
         System.out.println("Wybrałeś: Wyświetlenie listy książek.");
-        for (Book book : listOfBooks) {
-            System.out.println(book.getTitle() + " " + book.getYearOfPublication() + " " + book.getNumberIsbn());
-        }
+        System.out.println(listOfBooks);
     }
 
     void addBook() {
@@ -35,7 +33,7 @@ public class BooksMethods {
         int year = Integer.parseInt(scanner.nextLine());
         System.out.println("Podaj numer ISBN");
         long isbn = Long.parseLong(scanner.nextLine());
-        listOfBooks.add(new Book(title, isbn, year));
+        listOfBooks.add(new Book(title, isbn, year, null, null));
     }
 
     void removeBookByTitle() {
